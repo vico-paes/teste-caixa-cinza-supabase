@@ -1,9 +1,11 @@
 # Testes Caixa Cinza em API de Autenticação (Supabase + Postman)
 
-**Aluno:** Vinicius Paes Lima
-**RA:** 2520215
-**Curso:** CST em Análise e Desenvolvimento de Sistemas - FACENS
-**Data de execução:** 04/11/2026
+| | |
+|---|---|
+| **Aluno** | Vinicius Paes Lima |
+| **RA** | 2520215 |
+| **Curso** | CST em Análise e Desenvolvimento de Sistemas - FACENS |
+| **Data de execução** | 04/11/2026 |
 
 ---
 
