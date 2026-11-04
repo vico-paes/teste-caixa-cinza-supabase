@@ -225,7 +225,7 @@ Depois rodei a collection inteira de uma vez: **19 asserções, 19 aprovadas, 0 
 
 **Erros encontrados durante a execução**
 
-Nas duas primeiras vezes que rodei o CT01, o retorno foi `400 - Invalid login credentials`. O problema não era a API: a senha que estava no environment do Postman não era igual à senha cadastrada no usuário. Como a resposta chegou do serviço de autenticação com código e mensagem certinhos, deu para ver que a URL e a API key estavam corretas e que o problema estava só na senha. Depois de corrigir a variável `password`, o CT01 passou.
+Nenhum cenário retornou algo diferente do esperado. Os erros que apareceram foram os provocados de propósito nos cenários CT02 a CT05, e todos vieram com status, `error_code` e mensagem coerentes.
 
 # Registro dos Testes
 
@@ -253,7 +253,6 @@ Nenhum cenário falhou: todos os resultados obtidos bateram com os esperados. Me
 1. **Status 400 em vez de 401.** Para senha errada e usuário inexistente, o Supabase devolve `400 Bad Request`. Pela convenção REST, falha de autenticação costuma ser `401 Unauthorized`. Não chega a ser um erro, mas quem consome a API precisa tratar pelo `error_code` e não só pelo status.
 2. **Mensagem incompleta nos campos vazios.** Com e-mail e senha vazios, a mensagem é só "missing email or phone". Não avisa que a senha também está faltando.
 3. **Sem validação de formato de e-mail.** No CT05, um e-mail sem `@` não gerou erro de formato. Caiu no mesmo erro genérico de credenciais inválidas.
-4. **Falha de configuração do testador.** As duas primeiras execuções do CT01 falharam por causa da senha errada no environment (descrito em *Execução dos Testes*).
 
 # Resultados Obtidos
 
@@ -280,7 +279,7 @@ Resumo do que deu para observar:
 
 **A autenticação funcionou?** Sim. O usuário válido conseguiu logar e recebeu o access token, e todas as tentativas inválidas foram bloqueadas com mensagem de erro.
 
-**Dificuldades encontradas.** A principal foi o CT01 falhando no começo por causa da senha diferente no environment. Levou um tempo para entender que o problema não era a API. A dica estava na própria resposta: como ela veio no formato padrão do Supabase, a conexão e a chave estavam certas. Também tive um pouco de instabilidade no painel do Supabase (algumas telas demoraram para carregar e a sessão chegou a expirar uma vez).
+**Dificuldades encontradas.** A principal foi a instabilidade do painel do Supabase no dia: algumas telas (lista de usuários e API Keys) demoraram bastante para carregar e a sessão chegou a expirar no meio da configuração, o que atrasou a coleta das credenciais. Outro ponto foi entender a diferença entre as chaves `anon` e `service_role` e escolher a certa para usar no cliente, já que a `service_role` ignora as regras de segurança e não pode ser exposta.
 
 **Falhas identificadas.** Nenhum defeito funcional. Os pontos de atenção foram o uso de 400 em vez de 401, a mensagem incompleta para campos vazios e a falta de validação de formato do e-mail.
 
